@@ -593,9 +593,13 @@ body .row {
   font-size: 13px;
   text-transform: capitalize;
 }
-.footer .footer_menu ul li:hover {
+.footer .footer_menu ul li a {
+  color: #333;
+}
+.footer .footer_menu ul li a:hover {
   color: #e65440;
   cursor: pointer;
+  text-decoration: none;
 }
 .footer .footer_newsletter  input {
   margin-top: 30px;

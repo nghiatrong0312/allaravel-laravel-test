@@ -164,22 +164,38 @@
           <div class="row footer">
               <div class="col-sm-3 footer_info">
                 <h4>GET IN TOUCH</h4>
-                <p>Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879</p>
+                <?php  
+                use App\Address;
+                $address_data = Address::cursor();
+                ?>
+                <p>
+                <?php foreach ($address_data as $key => $address_datas): ?>
+                  <?php echo $address_datas['address'] ?><br>
+                  <?php echo $address_datas['phone'] ?>
+                <?php endforeach ?>
+                </p>
                 <div class="footer_info-icon">
-                  <i class="fa fa-facebook"></i>
-                  <i class="fa fa-instagram"></i>
-                  <i class="fa fa-pinterest-p"></i>
-                  <i class="fa fa-youtube-play"></i>
+                  <?php 
+                  use App\Social_network; 
+                  $social_data = Social_network::cursor();
+                  ?>
+                  <?php foreach ($social_data as $key => $social_datas): ?>
+                  <a href="<?php echo $social_datas['link'] ?>" target="_blank"><?php echo $social_datas['icon'] ?></a>
+                  <?php endforeach ?>
                 </div>
               </div>
               <div class="col-sm-6 footer_menu">
                 <div class="col-sm-4">
                   <h4>CATEGORIES</h4>
                   <ul>
-                    <li>Men</li>
-                    <li>Women</li>
-                    <li>Dresses</li>
-                    <li>Sunglass</li>
+                    <?php  
+                    use App\Categories;
+                    $categories_data  = Categories::cursor();
+                    ?>
+                    <?php foreach ($categories_data as $key => $categories_datas): ?>
+                    <li><a href="{{ url('categories', ['id' => $categories_datas['id_categories']]) }}"><?php echo $categories_datas['categories_name'] ?></a></li>
+                    
+                    <?php endforeach ?>
                   </ul>
                 </div>
                 <div class="col-sm-4">
@@ -265,7 +281,7 @@
     })
     </script>
     <script>
-    var slideIndex = 1;
+    var slideIndex = 0;
     showSlide(slideIndex);
 
     function currentSlide(n) {
@@ -275,16 +291,16 @@
        var i;
        var slide = document.getElementsByClassName('mySlide');
        var dot1 = document.getElementsByClassName('dot1');
-       if (n > slide.length) {slideIndex = 1}
-       if (n < 1) {slide.length = slideIndex}
+       if (n > slide.length) {slideIndex = 0}
+       if (n < 0) {slide.length = slideIndex}
        for (i = 0; i < slide.length; i++) {
            slide[i].style.display = "none";
        }
        for (i = 0; i < dot1.length; i++) {
       dot1[i].className = dot1[i].className.replace(" active", "");
       }
-      slide[slideIndex-1].style.display = "block";  
-      dot1[slideIndex-1].className += " active";
+      slide[slideIndex-0].style.display = "block";  
+      dot1[slideIndex-0].className += " active";
         }
     </script>
     <script type="text/javascript">

@@ -11,49 +11,43 @@
 		<div class="col-sm-6 detail_product-img">
 			<div class="col-sm-12" style="padding: 0px;">
 		        <div class="slideshow-container">   
+		        	<?php  
+		        	$quantity_img = count($library_data); 
+		        	?>
+		        	<?php foreach ($library_data as $key => $library_datas): ?>
+		        	
 		    		<div class="mySlide zoom" id="ex1">
-		            	<img src="{{ url('../storage/app/upload/2.jpg') }}">
+		            	<img src="{{ url('../storage/app/upload', ['img' => $library_datas['name_img']]) }}">
 		            </div>
-		            <div class="mySlide ">
-		            	<img src="{{ url('../storage/app/upload/3.jpg') }}">
-		            </div>
-		            <div class="mySlide">
-		            	<img src="{{ url('../storage/app/upload/4.jpg') }}">
-		            </div>
-		            <div class="mySlide">
-		            	<img src="{{ url('../storage/app/upload/5.jpg') }}">
-		            </div>
+		            
+		            <?php endforeach ?>
 		        </div>
 		        <div class="dot">
-		            <div class="col-sm-3 dot1" id="myDot" onclick="currentSlide(1)">
-		            	<img src="{{ url('../storage/app/upload/2.jpg') }}">
+		        	<?php foreach ($library_data as $key => $library_datas): ?>
+		            <div class="col-sm-3 dot1" id="myDot" onclick="currentSlide(<?php echo $key ?>)">
+		            	<img src="{{ url('../storage/app/upload', ['img' => $library_datas['name_img']]) }}">
 		            </div>
-		            <div class="col-sm-3 dot1" id="myDot" onclick="currentSlide(2)">
-		            	<img src="{{ url('../storage/app/upload/3.jpg') }}">
-		            </div>
-		            <div class="col-sm-3 dot1" id="myDot" onclick="currentSlide(3)">
-		            	<img src="{{ url('../storage/app/upload/4.jpg') }}">
-		            </div>
-		            <div class="col-sm-3 dot1" id="myDot" onclick="currentSlide(4)">
-		            	<img src="{{ url('../storage/app/upload/5.jpg') }}">
-		            </div>
+		            <?php endforeach ?>
 		        </div>
 			</div>
 		</div>
 		<div class="col-sm-6 detail_product-info">
-			<h2>Boxy T-Shirt with Roll Sleeve Detail</h2>
-			<h3>300.000 <small>VND</small	></h3>
-			<p>Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.</p>
+			<?php foreach ($product as $key => $products): ?>
+			<h2><?php echo $products['product_name'] ?></h2>
+			<h3><?php echo number_format($products['product_price'], 0, ',', '.') ?> <small>VND</small></h3>
+			<p><?php echo $products['describe_product'] ?></p>
+			<?php endforeach ?>
 			<div class="col-sm-12 detail_product-info-select">
 				<div class="col-sm-2">
 					<h5>size</h5>
 				</div>
 				<div class="col-sm-10">
 					<select>
-					  <option value="volvo">Volvo</option>
-					  <option value="saab">Saab</option>
-					  <option value="vw">VW</option>
-					  <option value="audi" selected>Audi</option>
+						<?php foreach ($size_data as $key => $size_datas): ?>	
+
+						<option value="volvo"><?php echo $size_datas['size_product'] ?></option>
+
+						<?php endforeach ?>
 					</select>
 				</div>
 			</div>
@@ -63,10 +57,11 @@
 				</div>
 				<div class="col-sm-10">
 					<select>
-					  <option value="volvo">Volvo</option>
-					  <option value="saab">Saab</option>
-					  <option value="vw">VW</option>
-					  <option value="audi" selected>Audi</option>
+						<?php foreach ($color_data as $key => $color_datas): ?>
+
+						<option value="volvo"><?php echo $color_datas['color_product'] ?></option>
+
+						<?php endforeach ?>
 					</select>
 				</div>
 			</div>
